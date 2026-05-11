@@ -10,8 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_11_063347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "artists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "genre"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playlist_songs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "playlist_id", null: false
+    t.bigint "song_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id"
+    t.index ["song_id"], name: "index_playlist_songs_on_song_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "duration"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+  end
+
+  add_foreign_key "playlist_songs", "playlists"
+  add_foreign_key "playlist_songs", "songs"
+  add_foreign_key "songs", "artists"
 end
