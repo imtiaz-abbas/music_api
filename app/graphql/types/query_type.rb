@@ -14,7 +14,7 @@ module Types
     def artist(id:)
       Artist.find(id)
     rescue ActiveRecord::RecordNotFound
-      nil
+      raise GraphQL::ExecutionError, "Artist with id #{id} not found"
     end
 
     # --- Songs ---
@@ -29,7 +29,7 @@ module Types
     def song(id:)
       Song.find(id)
     rescue ActiveRecord::RecordNotFound
-      nil
+      raise GraphQL::ExecutionError, "Song with id #{id} not found"
     end
 
     # --- Playlists ---
@@ -44,7 +44,7 @@ module Types
     def playlist(id:)
       Playlist.find(id)
     rescue ActiveRecord::RecordNotFound
-      nil
+      raise GraphQL::ExecutionError, "Playlist with id #{id} not found"
     end
 
   end

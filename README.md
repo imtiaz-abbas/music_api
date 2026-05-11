@@ -1,24 +1,66 @@
-# README
+# music_api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails API-only app exposing a GraphQL endpoint for a music collection domain — Artists, Songs, and Playlists.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+- Ruby on Rails 8 (API mode)
+- PostgreSQL
+- [graphql-ruby](https://graphql-ruby.org/)
+- GraphiQL (in-browser IDE, development only)
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+bundle install
+rails db:create db:migrate db:seed
+```
 
-* Database creation
+## Running the server
 
-* Database initialization
+```bash
+rails server
+```
 
-* How to run the test suite
+- GraphQL endpoint: `http://localhost:3000/graphql`
+- GraphiQL IDE: `http://localhost:3000/graphiql`
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running the test suite
 
-* Deployment instructions
+```bash
+bundle exec rspec
+```
 
-* ...
+Run with documentation format to see each example:
+
+```bash
+bundle exec rspec --format documentation
+```
+
+Run a specific file:
+
+```bash
+bundle exec rspec spec/graphql/mutations/artist_mutations_spec.rb
+```
+
+## GraphQL operations
+
+### Queries
+
+```graphql
+{ artists { id name genre } }
+{ artist(id: "1") { name songs { title durationInMins } } }
+{ songs { id title durationInMins artist { name } } }
+{ playlists { id name songs { title } } }
+```
+
+### Mutations
+
+```graphql
+mutation {
+  createArtist(input: { name: "Radiohead", genre: "Alternative" }) {
+    artist { id name }
+    errors
+  }
+}
+```
