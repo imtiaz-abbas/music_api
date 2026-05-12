@@ -68,5 +68,4 @@ mutation {
 
 DEMO
 
-
-https://github.com/imtiaz-abbas/music_api/issues/2#issuecomment-4428246233
+https://github.com/user-attachments/assets/83ed0c61-8f56-48de-a227-369699446ffb
