@@ -64,3 +64,9 @@ mutation {
   }
 }
 ```
+
+
+DEMO
+
+
+https://github.com/imtiaz-abbas/music_api/issues/2#issuecomment-4428246233
